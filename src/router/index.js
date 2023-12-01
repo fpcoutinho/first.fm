@@ -34,6 +34,16 @@ const router = createRouter({
       component: () => import('../views/auth-view.vue'),
       beforeEnter: requireNoAuth
     },
+    {
+      path: '/help',
+      name: 'Help',
+      component: () => import('../views/help-view.vue'),
+    },
+    {
+      path: '/:pathMatch(.*)*',
+      name: 'not-found',
+      component: () => import('../views/error-view.vue')
+    },
   ],
 })
 

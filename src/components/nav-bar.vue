@@ -1,7 +1,7 @@
 <template>
   <header class="navbar bg-base-100 fixed top-0 p-0 xl:px-20 w-full overflow-hidden z-10">
     <div class="flex-1">
-      <span class="btn btn-ghost text-xl">First.fm</span>
+      <router-link :to="{ name: 'Home' }" class="btn btn-ghost text-xl">First.fm</router-link>
     </div>
     <div class="flex-none">
       <ul class="menu menu-horizontal px-1">
