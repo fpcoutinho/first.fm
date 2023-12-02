@@ -16,8 +16,8 @@
             </span>
           </label>
         </li>
-        <li v-if="props.user"><span>Hello, {{ user.displayName }}!</span></li>
-        <li v-if="props.user"><button type="button" onclick="logout_modal.showModal()">Logout</button></li>
+        <li v-if="user"><span>Hello, {{ user.displayName }}!</span></li>
+        <li v-if="user"><button type="button" onclick="logout_modal.showModal()">Logout</button></li>
       </ul>
     </div>
   </header>
@@ -39,13 +39,12 @@
 </template>
 
 <script setup>
-import useLogout from '../composables/useLogout'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+import useLogout from '@/composables/useLogout'
+import getUser from '@/composables/getUser'
 
-const props = defineProps({
-  user: Object
-})
+const { user } = getUser()
 
 const isDark = ref(localStorage.getItem('theme') === 'dark')
 const toggleTheme = () => {

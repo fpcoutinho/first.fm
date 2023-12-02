@@ -47,7 +47,7 @@
 
 <script setup>
 import { ref, computed } from 'vue'
-import useSignup from '../composables/useSignup'
+import useSignup from '@/composables/useSignup'
 
 const emit = defineEmits(['signup'])
 
@@ -59,6 +59,7 @@ const password = ref('')
 const password2 = ref('')
 const passwordError = computed(() => {
   if (password.value !== password2.value) return 'Passwords do not match!'
+  return null
 })
 
 const register = async () => {
