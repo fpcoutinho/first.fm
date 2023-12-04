@@ -16,7 +16,8 @@
             </span>
           </label>
         </li>
-        <li v-if="user"><span>Hello, {{ user.displayName }}!</span></li>
+        <li v-if="user"><router-link :to="{ name: 'UserPlaylists' }">{{ user.displayName }}'s playlists!</router-link>
+        </li>
         <li v-if="user">
           <router-link :to="{ name: 'CreatePlaylist' }">Create Playlist</router-link>
         </li>
@@ -68,3 +69,9 @@ const signout = async () => {
   })
 }
 </script>
+
+<style>
+.menu a.router-link-active {
+  @apply text-secondary;
+}
+</style>

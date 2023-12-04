@@ -1,38 +1,35 @@
 <template>
-  <div class="form-card card bg-base-100 shadow-xl w-3/4">
-    <div class="card-body items-center text-center">
-      <h1 class="card-title text-2xl">Create a Playlist</h1>
-      <form class="prose w-full flex flex-col gap-2" @submit.prevent="createPlaylist">
-        <div class="form-control w-full">
-          <label class="label" for="title">
-            <span class="label-text font-bold">Title</span>
-          </label>
-          <input type="text" id="title" name="playlist title" placeholder="Playlist title"
-            class="input input-bordered w-full" v-model="title" required />
+  <div class="flex flex-col items-center text-center w-full">
+    <h1>Create a Playlist</h1>
+    <form class="prose w-full flex flex-col gap-2" @submit.prevent="createPlaylist">
+      <div class="form-control w-full">
+        <label class="label" for="title">
+          <span class="label-text font-bold">Title</span>
+        </label>
+        <input type="text" id="title" name="playlist title" placeholder="Playlist title"
+          class="input input-bordered w-full" v-model="title" required />
+      </div>
+      <div class="form-control w-full">
+        <label class="label" for="description">
+          <span class="label-text font-bold">Description</span>
+        </label>
+        <textarea id="description" name="playlist description" placeholder="Playlist description..."
+          class="input input-bordered h-32 w-full" v-model="description" required></textarea>
+      </div>
+      <div class="form-control w-full">
+        <label class="label" for="image">
+          <span class="label-text font-bold">Cover Image</span>
+        </label>
+        <input type="file" id="image" name="playlist image" class="file-input file-input-bordered w-full"
+          @change="pickImage" />
+        <div class="label">
+          <span class="label-text text-error">{{ fileError }}</span>
         </div>
-        <div class="form-control w-full">
-          <label class="label" for="description">
-            <span class="label-text font-bold">Description</span>
-          </label>
-          <textarea id="description" name="playlist description" placeholder="Playlist description..."
-            class="input input-bordered h-24 w-full" v-model="description" required></textarea>
-        </div>
-        <div class="form-control w-full">
-          <label class="label" for="image">
-            <span class="label-text font-bold">Cover Image</span>
-          </label>
-          <input type="file" id="image" name="playlist image" class="file-input file-input-bordered w-full"
-            @change="pickImage" />
-          <div class="label">
-            <span class="label-text text-error">{{ fileError }}</span>
-          </div>
-        </div>
-        <div class="form-control w-full">
-          <button class="btn btn-primary" type="submit" :disabled="fileError">Create Playlist</button>
-        </div>
-      </form>
-      <div class="card-actions w-full justify-around items-center"></div>
-    </div>
+      </div>
+      <div class="form-control w-full">
+        <button class="btn btn-primary" type="submit" :disabled="fileError">Create Playlist</button>
+      </div>
+    </form>
   </div>
   <dialog v-if="isPending" class="modal loading-modal" open>
     <span class="loading loading-spinner loading-lg text-primary"></span>

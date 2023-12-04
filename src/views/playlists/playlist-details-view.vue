@@ -1,9 +1,9 @@
 <template>
   <div class="error" v-if="error">{{ error }}</div>
-  <div v-if="playlist" class="playlist-details w-full flex flex-row gap-24 pt-10 px-0 xl:px-4">
+  <div v-if="playlist" class="playlist-details w-full flex flex-row gap-20 pt-10 px-0 xl:px-4">
 
     <!-- playlist information -->
-    <div class="flex-3 flex flex-col items-center gap-3">
+    <div class="flex-2 flex flex-col items-center gap-3">
       <div class="overflow-hidden rounded-lg">
         <img :src="playlist.coverUrl" alt="playlist cover" width="300" height="300"
           class="cover-image box-border m-0 object-cover">
@@ -21,10 +21,13 @@
     </div>
 
     <!-- song list -->
-    <div v-if="!playlist.length" class="flex-1 flex flex-col text-start w-full">
+    <div v-if="!playlist.songs.length" class="flex-1 flex flex-col text-start w-full">
       This playlist doesn't have any songs yet...
     </div>
-    <table-data v-else :songs="playlist.songs" />
+    <div v-else class="w-full flex-1">
+      <table-data class="song-table overflow-auto" :songs="playlist.songs" :ownership="ownership"
+        @delete-song="deleteASong" />
+    </div>
 
     <!-- modals -->
     <dialog id="delete_modal" class="modal modal-bottom sm:modal-middle">
@@ -70,7 +73,7 @@ const props = defineProps({
 
 const { user } = getUser()
 const { error, document: playlist } = getDocument('playlists', props.id)
-const { deleteDocument, isPending } = useDocument('playlists', props.id)
+const { updateDocument, deleteDocument, isPending } = useDocument('playlists', props.id)
 const { deleteImage } = useStorage()
 
 const ownership = computed(() => {
@@ -82,6 +85,11 @@ const deletePlaylist = async () => {
   await deleteDocument()
   await deleteImage(path)
   router.push({ name: 'Home' })
+}
+
+const deleteASong = async (payload) => {
+  const newSongs = playlist.value.songs.filter(song => song.id != payload.songId)
+  await updateDocument({ songs: newSongs })
 }
 </script>
 

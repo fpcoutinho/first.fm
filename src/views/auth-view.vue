@@ -37,7 +37,7 @@ const router = useRouter()
 const showLogin = ref(true)
 
 const enterHome = () => {
-  router.push({ name: 'Home' })
+  router.push({ name: 'UserPlaylists' })
 }
 </script>
 

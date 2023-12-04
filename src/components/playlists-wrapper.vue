@@ -9,8 +9,10 @@
         <div class="card-body">
           <h3 class="card-title">{{ playlist.title }}</h3>
           <p>{{ snippet(playlist.description) }}</p>
-          <p>{{ playlist.songs.length }} songs</p>
-          <p>{{ formattedDate(playlist.createdAt) }}</p>
+          <p>{{ playlist.songs.length }} songs.</p>
+          <p>Created by <span class="text-secondary">{{ playlist.userName }}</span>,
+            {{ formattedDate(playlist.createdAt) }}.
+          </p>
         </div>
       </div>
     </router-link>

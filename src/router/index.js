@@ -35,6 +35,12 @@ const router = createRouter({
       beforeEnter: requireNoAuth
     },
     {
+      path: '/user/playlists',
+      name: 'UserPlaylists',
+      component: () => import('@/views/user-playlists-view.vue'),
+      beforeEnter: requireAuth
+    },
+    {
       path: '/playlists/create',
       name: 'CreatePlaylist',
       component: () => import('@/views/playlists/create-playlist-view.vue'),
