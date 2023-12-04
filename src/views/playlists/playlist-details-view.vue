@@ -3,7 +3,7 @@
   <div v-if="playlist" class="w-full flex flex-row gap-24 pt-10 px-0 xl:px-4">
 
     <!-- playlist information -->
-    <div class="playlist-info flex flex-col items-center justify-between gap-3">
+    <div class="flex-3 flex flex-col items-center gap-3">
       <div class="overflow-hidden rounded-lg">
         <img :src="playlist.coverUrl" alt="playlist cover" width="300" height="300" class="box-border m-0">
       </div>
@@ -20,9 +20,10 @@
     </div>
 
     <!-- song list -->
-    <div class="flex flex-col text-start">
-      song list here
+    <div v-if="!playlist.length" class="flex-1 flex flex-col text-start w-full">
+      This playlist doesn't have any songs yet...
     </div>
+    <table-data v-else :songs="playlist.songs" />
   </div>
 </template>
 
@@ -30,6 +31,7 @@
 import getDocument from '@/composables/getDocument'
 import getUser from '@/composables/getUser'
 import { computed } from 'vue'
+import TableData from '@/components/table-data.vue'
 
 const props = defineProps({
   id: {
