@@ -18,7 +18,7 @@
         </li>
         <li v-if="user"><span>Hello, {{ user.displayName }}!</span></li>
         <li v-if="user">
-          <router-link :to="{ name: 'CreatePlaylist' }">Add Playlist</router-link>
+          <router-link :to="{ name: 'CreatePlaylist' }">Create Playlist</router-link>
         </li>
         <li v-if="user"><button type="button" onclick="logout_modal.showModal()">Logout</button></li>
       </ul>

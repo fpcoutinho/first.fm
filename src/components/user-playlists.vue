@@ -1,16 +1,19 @@
 <template>
-  <div class="playlists">
-    <div v-for="playlist in props.playlists" class="card card-side bg-base-100 shadow-xl" :key="playlist.id">
-      <figure class="playlist-cover">
-        <img :src="playlist.coverUrl" alt="playlist image" />
-      </figure>
-      <div class="card-body">
-        <h3 class="card-title">{{ playlist.title }}</h3>
-        <p>{{ snippet(playlist.description) }}</p>
-        <p>{{ playlist.songs.length }} songs</p>
-        <p>{{ formattedDate(playlist.createdAt) }}</p>
+  <div class="playlists w-full flex flex-col gap-6">
+    <router-link v-for="playlist in props.playlists" :key="playlist.id"
+      :to="{ name: 'PlaylistDetails', params: { id: playlist.id } }" class="no-underline">
+      <div class="card card-side bg-base-100 shadow-xl">
+        <figure class="playlist-cover">
+          <img :src="playlist.coverUrl" alt="playlist image" />
+        </figure>
+        <div class="card-body">
+          <h3 class="card-title">{{ playlist.title }}</h3>
+          <p>{{ snippet(playlist.description) }}</p>
+          <p>{{ playlist.songs.length }} songs</p>
+          <p>{{ formattedDate(playlist.createdAt) }}</p>
+        </div>
       </div>
-    </div>
+    </router-link>
   </div>
 </template>
 
@@ -37,14 +40,13 @@ const formattedDate = (timestamp) => {
 </script>
 
 <style>
-.playlists {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
 .playlists .card {
   height: 250px;
+}
+
+.playlists .card:hover {
+  transform: scale(1.01);
+  transition: transform 0.2s ease-in-out;
 }
 
 .playlists .card .card-body .card-title,

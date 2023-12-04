@@ -1,15 +1,16 @@
 <template>
-  <div>
-    <h1>Home</h1>
-    <div v-if="errorGet" class="text-error">{{ errorGet }}</div>
-    <user-playlists v-else :playlists="playlists" />
+  <h1>My Playlists</h1>
+  <div v-if="errorGet" class="text-error">{{ errorGet }}</div>
+  <div v-else-if="!playlists.length" class="text-center pt-12">
+    <span class="text-lg">It looks like you don't have any playlists yet...</span>
   </div>
+  <user-playlists v-else :playlists="playlists" />
 </template>
 
 <script setup>
-import UserPlaylists from '../components/user-playlists.vue'
-import getUser from '../composables/getUser'
-import getCollection from '../composables/getCollection'
+import UserPlaylists from '@/components/user-playlists.vue'
+import getUser from '@/composables/getUser'
+import getCollection from '@/composables/getCollection'
 import { watch, computed } from 'vue'
 import { useRouter } from 'vue-router'
 

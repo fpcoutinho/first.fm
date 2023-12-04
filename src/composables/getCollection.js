@@ -1,5 +1,5 @@
 import { ref, watchEffect } from 'vue'
-import { db } from '../firebase/config'
+import { db } from '@/firebase/config'
 import { collection, onSnapshot, query, orderBy } from "firebase/firestore"
 
 const getCollection = (col) => {
@@ -15,7 +15,7 @@ const getCollection = (col) => {
     })
     documents.value = results
     error.value = null
-  }, (err) => {
+  }, () => {
     documents.value = null
     error.value = "could not fetch data"
   })

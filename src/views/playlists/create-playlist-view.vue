@@ -44,7 +44,8 @@ import { ref } from 'vue'
 import getUser from '@/composables/getUser'
 import useStorage from '@/composables/useStorage'
 import useCollection from '@/composables/useCollection'
-import { timestamp } from '../../firebase/config'
+import { timestamp } from '@/firebase/config'
+import router from '@/router'
 
 const { collectionError, addDocument } = useCollection('playlists')
 const { filePath, url, storageError, uploadImage } = useStorage()
@@ -61,7 +62,7 @@ const createPlaylist = async () => {
     isPending.value = true
     await uploadImage(image.value)
     if (!storageError) {
-      await addDocument({
+      const doc = await addDocument({
         title: title.value,
         description: description.value,
         coverUrl: url.value,
@@ -73,10 +74,7 @@ const createPlaylist = async () => {
       })
       isPending.value = false
       if (!collectionError) {
-        title.value = ''
-        description.value = ''
-        image.value = null
-        fileError.value = null
+        router.push({ name: 'PlaylistDetails', params: { id: doc.id } })
       } else {
         console.log(collectionError.value)
       }
