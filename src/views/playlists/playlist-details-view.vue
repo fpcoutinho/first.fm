@@ -1,32 +1,80 @@
 <template>
-  <div v-if="error" class="text-error">{{ error }}</div>
-  <div v-else-if="!error && document" class="form-card card bg-base-100 shadow-xl w-3/4">
-    <div class="card-body items-center text-center">
-      <h1 class="card-title text-2xl">{{ document.title }}</h1>
-      <p class="text-base-content">{{ document.description }}</p>
-      <div class="card-actions w-full justify-around items-center">
-        <button class="btn btn-primary">
-          Edit Playlist
-        </button>
-        <button class="btn btn-primary">
-          Add Track
-        </button>
+  <div class="error" v-if="error">{{ error }}</div>
+  <div v-if="playlist" class="playlist-details">
+
+    <!-- playlist information -->
+    <div class="playlist-info">
+      <div class="cover">
+        <img :src="playlist.coverUrl" width="300" height="300">
       </div>
+      <h2>{{ playlist.title }}</h2>
+      <p class="username">Created by {{ playlist.userName }}</p>
+      <p class="description">{{ playlist.description }}</p>
     </div>
+
+    <!-- song list -->
+    <div class="song-list">
+      <p>song list here</p>
+    </div>
+
   </div>
 </template>
 
-<script setup>
+<script>
 import getDocument from '@/composables/getDocument'
 
-const props = defineProps({
-  id: {
-    type: String,
-    required: true
-  }
-})
+export default {
+  props: ['id'],
+  setup(props) {
+    const { error, document: playlist } = getDocument('playlists', props.id)
 
-const { document, error } = getDocument('playlists', props.id)
+    return { error, playlist }
+  }
+}
 </script>
 
-<style scoped></style>
+<style>
+.playlist-details {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 80px;
+  width: 100%;
+}
+
+.cover {
+  overflow: hidden;
+  border-radius: 20px;
+  position: relative;
+  padding: 160px;
+}
+
+.cover img {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  object-fit: cover;
+}
+
+.playlist-info {
+  text-align: center;
+}
+
+.playlist-info h2 {
+  text-transform: capitalize;
+  font-size: 28px;
+  margin-top: 20px;
+}
+
+.playlist-info p {
+  margin-bottom: 20px;
+}
+
+.username {
+  color: #999;
+}
+
+.description {
+  text-align: left;
+}
+</style>
