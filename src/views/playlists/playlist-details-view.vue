@@ -16,7 +16,7 @@
       <div v-if="ownership" class="join w-full">
         <button type="button" class="btn btn-sm join-item w-1/3">Edit</button>
         <button type="button" onclick="delete_modal.showModal()" class="btn btn-sm join-item w-1/3">Delete</button>
-        <button type="button" class="btn btn-sm join-item w-1/3">Add Song</button>
+        <button type="button" onclick="add_song_modal.showModal()" class="btn btn-sm join-item w-1/3">Add Song</button>
       </div>
     </div>
 
@@ -25,6 +25,8 @@
       This playlist doesn't have any songs yet...
     </div>
     <table-data v-else :songs="playlist.songs" />
+
+    <!-- modals -->
     <dialog id="delete_modal" class="modal modal-bottom sm:modal-middle">
       <div class="modal-box">
         <h3 class="font-bold text-lg">Delete {{ playlist.title }}</h3>
@@ -40,6 +42,9 @@
         <button>close</button>
       </form>
     </dialog>
+
+    <add-song id="add_song_modal" :parent-playlist="playlist" />
+
     <dialog v-if="isPending" class="modal loading-modal" open>
       <span class="loading loading-spinner loading-lg text-primary"></span>
     </dialog>
@@ -54,6 +59,7 @@ import getUser from '@/composables/getUser'
 import { computed } from 'vue'
 import router from '@/router'
 import TableData from '@/components/table-data.vue'
+import AddSong from '../../components/add-song.vue'
 
 const props = defineProps({
   id: {

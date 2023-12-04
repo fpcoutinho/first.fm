@@ -1,7 +1,5 @@
 <script async setup >
 import { computed, ref } from 'vue'
-import { format } from 'date-fns'
-import { ptBR } from 'date-fns/locale'
 
 const props = defineProps({
   songs: {
@@ -32,7 +30,7 @@ const filterTableData = computed(() => {
           <th>Artist</th>
           <th>Album</th>
           <th>Genre</th>
-          <th>Data</th>
+          <th>Year</th>
           <th></th>
         </tr>
       </thead>
@@ -42,9 +40,7 @@ const filterTableData = computed(() => {
           <td>{{ song.artist }}</td>
           <td>{{ song.album }}</td>
           <td>{{ song.genre }}</td>
-          <td>
-            {{ format(new Date(song.data), "yyyy", { locale: ptBR }) }}
-          </td>
+          <td>{{ song.year }}</td>
           <th>
             <button type="button" class="btn btn-error btn-xs">remove</button>
           </th>
@@ -56,7 +52,7 @@ const filterTableData = computed(() => {
           <th>Artist</th>
           <th>Album</th>
           <th>Genre</th>
-          <th>Data</th>
+          <th>Year</th>
           <th></th>
         </tr>
       </tfoot>
