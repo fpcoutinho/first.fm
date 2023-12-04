@@ -6,7 +6,7 @@
     <div class="flex-none">
       <ul class="menu menu-horizontal px-1">
         <li>
-          <label class="swap swap-rotate w-9 h-9" title="Trocar Tema" aria-label="Trocar Tema">
+          <label class="swap swap-rotate w-9 h-9" title="Change Theme" aria-label="Change Theme">
             <input type="checkbox" :checked="isDark" @change="toggleTheme" class="theme-controller" value="sunset" />
             <span class="material-symbols-outlined swap-on fill-current">
               dark_mode
@@ -24,7 +24,7 @@
       </ul>
     </div>
   </header>
-  <dialog id="logout_modal" class="modal modal-bottom sm:modal-middle font-open-sans">
+  <dialog id="logout_modal" class="modal modal-bottom sm:modal-middle">
     <div class="modal-box">
       <h3 class="font-bold text-lg">Log out</h3>
       <p class="py-4">Are you sure you want to log out?</p>
