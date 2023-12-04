@@ -12,6 +12,7 @@
     "@fontsource-variable/space-grotesk": "^5.0.15",
     "@fontsource/material-symbols-outlined": "^5.0.16",
     "@fontsource/redressed": "^5.0.17",
+    "date-fns": "^2.30.0",
     "firebase": "^10.7.0",
     "vue": "^3.3.4",
     "vue-router": "^4.2.5"
