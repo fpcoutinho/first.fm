@@ -1,12 +1,16 @@
 import { ref, watchEffect } from 'vue'
 import { db } from '@/firebase/config'
-import { collection, onSnapshot, query, orderBy } from "firebase/firestore"
+import { collection, onSnapshot, query, where, orderBy } from "firebase/firestore"
 
-const getCollection = (col) => {
+const getCollection = (col, q) => {
   const documents = ref(null)
   const error = ref(null)
 
   let collectionRef = query(collection(db, col), orderBy("createdAt"))
+
+  if (q) {
+    collectionRef = query(collectionRef, where(...q))
+  }
 
   const unsub = onSnapshot(collectionRef, snap => {
     let results = []
