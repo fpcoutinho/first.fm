@@ -1,4 +1,4 @@
-import { getStorage, uploadBytes, getDownloadURL } from 'firebase/storage'
+import { getStorage, uploadBytes, getDownloadURL, deleteObject } from 'firebase/storage'
 import { ref as storageRef } from '@firebase/storage'
 import getUser from './getUser'
 import { ref } from 'vue'
@@ -24,7 +24,18 @@ const useStorage = () => {
       }
   }
 
-  return {url, filePath, error, uploadImage}
+  const deleteImage = async (path) => {
+    const sref = storageRef(storage, path)
+
+    try {
+      await deleteObject(sref)
+    } catch (err) {
+      console.log(err.message)
+      error.value = err.message
+    }
+  }
+
+  return {url, filePath, error, uploadImage, deleteImage}
 }
 
 export default useStorage
